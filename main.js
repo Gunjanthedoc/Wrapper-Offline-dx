@@ -57,6 +57,7 @@ const createWindow = () => {
 			contextIsolation: true
 		}
 	});
+	mainWindow.maximize();
 	// use it in external scripts
 	process.env.MAIN_WINDOW_ID = mainWindow.id;
 
@@ -68,9 +69,9 @@ const createWindow = () => {
 	mainWindow.on("closed", () => mainWindow = null);
 
 	// debug stuff
-	if (env.NODE_ENV == "development") {
-		mainWindow.webContents.openDevTools();
-	}
+	// if (env.NODE_ENV == "development") {
+	// 	mainWindow.webContents.openDevTools();
+	// }
 };
 
 app.whenReady().then(() => {
