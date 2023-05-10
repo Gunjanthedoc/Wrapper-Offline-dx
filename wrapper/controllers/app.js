@@ -3,11 +3,9 @@ let discord;
 require("../../utils/discord")
 	.then((f) => discord = f);
 const database = require("../../data/database"), DB = new database(true);
-const reqIsStudio = require("../middlewares/req.isStudio");
 const { SWF_URL, STORE_URL, CLIENT_URL } = process.env;
 const group = new httpz.Group();
 
-group.add(reqIsStudio);
 // video list
 group.route("*", "/", (req, res) => {
 	discord("Video List");
@@ -140,10 +138,11 @@ group.route("GET", "/go_full", async (req, res) => {
 });
 group.route("GET", "/player", async (req, res) => {
 	discord("Video Player");
-	const { IS_WIDE } = DB.select();
+	const { IS_WIDE, DEFAULT_WATERMARK } = DB.select();
 	let flashvars = {
 		autostart: 1,
 		isWide: IS_WIDE,
+		isWixPaid: DEFAULT_WATERMARK == "wix" ? 0 : 1,
 		ut: 60,
 		apiserver: "/",
 		storePath: STORE_URL + "/<store>",
