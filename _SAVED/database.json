@@ -3,6 +3,46 @@
 		{
 			"type": "char",
 			"subtype": 0,
+			"title": "Grandma Doris",
+			"themeId": "family",
+			"id": "6a960e36",
+			"tags": "_cat:Side Chars"
+		},
+		{
+			"type": "char",
+			"subtype": 0,
+			"title": "Cool Boris",
+			"themeId": "family",
+			"id": "fe67fe12",
+			"tags": "_cat:Lazy Edits"
+		},
+		{
+			"type": "char",
+			"subtype": 0,
+			"title": "Nurse Martin",
+			"themeId": "family",
+			"id": "ce778197",
+			"tags": "_cat:Lazy Edits"
+		},
+		{
+			"type": "char",
+			"subtype": 0,
+			"title": "Skinny Griffin",
+			"themeId": "family",
+			"id": "2692751f",
+			"tags": "_cat:Side Chars"
+		},
+		{
+			"type": "char",
+			"subtype": 0,
+			"title": "Agent Doris",
+			"themeId": "family",
+			"id": "9d8ad7dc",
+			"tags": "_cat:Lazy Edits"
+		},
+		{
+			"type": "char",
+			"subtype": 0,
 			"title": "Boris",
 			"themeId": "family",
 			"id": "d76667e6",
@@ -333,5 +373,7 @@
 			"tags": "_cat:Main Cast"
 		}
 	],
-	"movies": []
+	"movies": [],
+	"folders": [],
+	"watermarks": []
 }
