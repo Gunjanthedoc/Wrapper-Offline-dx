@@ -14,9 +14,9 @@
 		<%~ includeFile("./includes/header", { env: it.env }) %>
 
 		<main>
-			<nav class="table_filters">
-				<a class="table_filter movies" href="javascript:;" onclick="switchFilter(false)">Movies</a>
-				<a class="table_filter starters" href="javascript:;" onclick="switchFilter(true)">Starters</a>
+			<nav class="tab_navigation">
+				<a href="javascript:;" class="tab movies" onclick="switchFilter(false)">Movies</a>
+				<a href="javascript:;" class="tab starters" onclick="switchFilter(true)">Starters</a>
 			</nav>
 			<table>
 				<thead>
@@ -86,10 +86,10 @@
 							<span>${date}, ${time}</span>
 						</td>
 						<td>
-							<a href="javascript:;" onclick="popup('${tbl.id}')" title="Play"></a>
+							<a href="javascript:;" onclick="popup('${tbl.id}', 'player')" title="Play"></a>
 							<a href="/go_full?movieId=${tbl.id}${starters ? "&isStarter=1" : ""}" title="Edit"></a>
 							<a href="/file/movie/file/${tbl.id}" download="${tbl.title}.zip" title="Download files -- NOT AN EXPORTER"></a>
-							<a href="javascript:;" onclick="destructive('${tbl.id}', 'clone')" title="Clone" ${starters ? "style='display:none'" : ""}></a>
+							<a href="javascript:;" onclick="popup('${tbl.id}', 'exporter')" title="Export"></a>
 							<a href="javascript:;" onclick="destructive('${tbl.id}', 'delete')" title="Delete"></a>
 						</td>
 					</tr>`.trim()
@@ -109,13 +109,13 @@
 
 		function switchFilter(shouldEqual) {
 			if (starters == shouldEqual) return;
-			$(".movie_filter").removeClass("selected");
+			$(".tab").removeClass("selected");
 			if (starters) {
 				starters = false;
-				$(".movie_filter.movies").addClass("selected");
+				$(".tab.movies").addClass("selected");
 			} else {
 				starters = true;
-				$(".movie_filter.starters").addClass("selected");
+				$(".tab.starters").addClass("selected");
 			}
 			$.get(`/api/${starters ? "starter" : "movie"}/list`)
 				.done((data) => {
@@ -148,8 +148,8 @@
 					});
 		}
 
-		function popup(id) {
-			window.open('/player?movieId=' + id, 'MsgWindow', 'width=1280,height=720,left=' + (screen.width / 2 - 640) +
+		function popup(id, path) {
+			window.open(`/${path}?movieId=${id}`, 'MsgWindow', 'width=1280,height=720,left=' + (screen.width / 2 - 640) +
 				',top=' + (screen.height / 2 - 360));
 		}
 

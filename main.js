@@ -4,7 +4,6 @@ License: MIT
 */
 // assign config and env.json stuff to process.env
 const env = Object.assign(process.env, require("./env"), require("./config"));
-const settings = (new (require("./data/database"))(true)).select();
 const { app, BrowserWindow, Menu } = require("electron");
 const fs = require("fs");
 const path = require("path");
@@ -21,9 +20,7 @@ if (!fs.existsSync(assets)) fs.mkdirSync(assets);
 if (!fs.existsSync(cache)) fs.mkdirSync(cache);
 if (!fs.existsSync(logs)) fs.mkdirSync(logs);
 if (!fs.existsSync(saved)) fs.mkdirSync(saved);
-// start discord rpc
-const discord = require("./utils/discord");
-// start the server
+const settings = (new (require("./data/database"))(true)).select();
 const server = require("./wrapper/server");
 server();
 
@@ -33,7 +30,7 @@ log files
 if (settings.SAVE_LOG_FILES) {
 	const filePath = path.join(logs, new Date().valueOf() + ".txt");
 	const writeStream = fs.createWriteStream(filePath);
-	console.log = console.error = function (c) {
+	console.log = console.error = console.warn = function (c) {
 		writeStream.write(c + "\n");
 		process.stdout.write(c + "\n");
 	};
