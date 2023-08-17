@@ -103,6 +103,9 @@ group.route("*", /\/(assets|goapi\/getAsset)\/([\S]*)/, (req, res, next) => {
 			break;
 		case "POST":
 			id = req.body.assetId;
+			if (!id.includes(".")) {
+				id = id + ".jpg";
+			};
 			break;
 		default:
 			next();
